@@ -31,6 +31,8 @@ class Register extends React.Component{
         e.preventDefault();
         console.log(this.state);
         this.resetState();
+        // redirect to page ask user to check inbox for email
+        // this.props.history.push('/confirm_email');
         
     }
 

@@ -27,6 +27,9 @@ class SignIn extends React.Component {
         e.preventDefault();
         console.log(this.state);
         this.resetState();
+        //redirect to homepage with user logged in
+        //sign in user 
+        // this.props.history.push('/')
     }
     render(){
 
