@@ -10,6 +10,7 @@ class Main extends React.Component{
   handleClick = () => {
     if (this.props.authenticated){
       //redirect to image page (LOGGED IN)
+      this.props.history.push('/picture_page');
     }
     else{
       this.props.history.push('/not_auth');

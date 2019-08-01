@@ -16,7 +16,7 @@ const Nav = (props) => {
                     </div>
                     {props.authenticated && 
                         <div>
-                        <Link to='/'><Button variant="secondary">TAKE / UPLOAD PICTURE</Button></Link>
+                        <Link to='/snap_page'><Button variant="secondary">TAKE / UPLOAD PICTURE</Button></Link>
                         </div>
                     }
                     <div >
@@ -28,7 +28,7 @@ const Nav = (props) => {
                             </React.Fragment>
                             :
                             <React.Fragment>
-                                <Button variant="secondary" className="mx-1">MY PROFILE</Button>
+                               <Link to="/myprofile"><Button variant="secondary" className="mx-1">MY PROFILE</Button></Link>
                                 <Button variant="secondary" className="mx-1">LOGOUT</Button>
                                 <Button variant="secondary" className="mx-1" onClick={props.authOut}>AUTH_OUT</Button>
                             </React.Fragment>
