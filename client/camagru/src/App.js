@@ -14,6 +14,7 @@ import PicturePage from './components/Pages/PicturePage';
 import TakePicturePage from './components/Pages/TakePicturePage';
 import MyProfile from './components/Pages/MyProfile';
 import Settings from './components/Pages/Settings';
+import ErrorPage from './components/Pages/ErrorPage';
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
         <Route path="/snap_page" exact component={TakePicturePage}/>
         <Route path="/myprofile" exact component={MyProfile}/>
         <Route path="/settings" exact component={Settings}/>
-        {/* <Route exact component={ErrorPage}/> */}
+        <Route exact component={ErrorPage}/>
       </Switch>
     </div>
   );
