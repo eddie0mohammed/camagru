@@ -4,22 +4,36 @@ import * as actionTypes from '../actions/actionTypes';
 
 
 const initialState = {
-    authenticated: false,
+    authenticated: "",
+    errorMessage: ''
 }
 
 const authReducer = (state = initialState, action) => {
     switch(action.type){
-        
-        case actionTypes.AUTH_IN:
-            return {
+    
+
+        case actionTypes.AUTH_ERROR:
+            return{
                 ...state,
-                authenticated: true
+                errorMessage: action.payload
             }
 
-        case actionTypes.AUTH_OUT:
+        case actionTypes.SIGN_UP:
             return {
                 ...state,
-                authenticated: false
+                authenticated: action.payload
+            }
+
+        case actionTypes.SIGN_IN:
+            return {
+                ...state,
+                authenticated: action.payload
+            }
+
+        case actionTypes.LOGOUT:
+            return {
+                ...state,
+                authenticated: action.payload
             }
             
 

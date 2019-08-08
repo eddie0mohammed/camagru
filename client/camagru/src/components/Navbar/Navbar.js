@@ -1,11 +1,19 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 import {Navbar, ButtonToolbar, Button} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
+import {compose} from 'redux';
 
 import {connect} from 'react-redux';
 import * as actionCreators from '../actions/actionCreators';
 
 const Nav = (props) => {
+
+    const handleLogout = () => {
+        props.logOut();
+        props.history.push('/');
+    }
+
     return (
         <Navbar expand="lg" variant="light" bg="dark">
             <Navbar.Brand style={{color: 'white', width: '15%', textAlign: 'center'}}><Link style={{color: 'white', textDecoration: 'none'}} to='/'>LOGO</Link></Navbar.Brand>
@@ -24,13 +32,13 @@ const Nav = (props) => {
                             <React.Fragment>
                                 <Link to="/signin"><Button variant="secondary" className="mx-1">SIGN IN</Button></Link>
                                 <Link to="/register"><Button variant="secondary" className="mx-1">REGISTER</Button></Link>
-                                <Button variant="secondary" className="mx-1" onClick={props.authIn}>AUTH_IN</Button>
+                                {/* <Button variant="secondary" className="mx-1" onClick={props.authIn}>AUTH_IN</Button> */}
                             </React.Fragment>
                             :
                             <React.Fragment>
                                <Link to="/myprofile"><Button variant="secondary" className="mx-1">MY PROFILE</Button></Link>
-                                <Button variant="secondary" className="mx-1">LOGOUT</Button>
-                                <Button variant="secondary" className="mx-1" onClick={props.authOut}>AUTH_OUT</Button>
+                                <Button variant="secondary" className="mx-1" onClick={handleLogout}>LOGOUT</Button>
+                                {/* <Button variant="secondary" className="mx-1" onClick={props.authOut}>AUTH_OUT</Button> */}
                             </React.Fragment>
 
                         }
@@ -50,10 +58,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        authIn: () => dispatch(actionCreators.authIn()),
-        authOut: () => dispatch(actionCreators.authOut()),
+        // authIn: () => dispatch(actionCreators.authIn()),
+        // authOut: () => dispatch(actionCreators.authOut()),
+        logOut: () => dispatch(actionCreators.logout()),
         
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps)
+)(Nav);

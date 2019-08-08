@@ -17,26 +17,51 @@ import Settings from './components/Pages/Settings';
 import ErrorPage from './components/Pages/ErrorPage';
 
 
-function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <Switch>
-        <Route path="/" exact component={Main}/>
-        <Route path="/signin" exact component={SignIn}/>
-        <Route path="/register" exact component={Register}/>
-        <Route path="/reset_password" exact component={ResetPassword}/>
-        <Route path="/new_password" exact component={ConfirmReset}/>
-        <Route path="/not_auth" exact component={SignIn_SignUp}/>
-        <Route path="/confirm_email" exact component={ConfirmEmailPage}/>
-        <Route path="/picture_page" exact component={PicturePage}/>
-        <Route path="/snap_page" exact component={TakePicturePage}/>
-        <Route path="/myprofile" exact component={MyProfile}/>
-        <Route path="/settings" exact component={Settings}/>
-        <Route exact component={ErrorPage}/>
-      </Switch>
-    </div>
-  );
+import {auth} from './config/firebase';
+
+
+class App extends React.Component {
+
+  state = {
+    currentUser: null,
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount(){
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {  //is listening for change in auth; dont need to fetch everytime
+      this.setState({currentUser: user});
+    
+    })
+  }
+
+  componentWillUnmount(){
+    this.unsubscribeFromAuth(); //stop listening
+  }
+
+
+
+  render(){
+    return (
+      <div className="App">
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Main}/>
+          <Route path="/signin" exact component={SignIn}/>
+          <Route path="/register" exact component={Register}/>
+          <Route path="/reset_password" exact component={ResetPassword}/>
+          <Route path="/new_password" exact component={ConfirmReset}/>
+          <Route path="/not_auth" exact component={SignIn_SignUp}/>
+          <Route path="/confirm_email" exact component={ConfirmEmailPage}/>
+          <Route path="/picture_page" exact component={PicturePage}/>
+          <Route path="/snap_page" exact component={TakePicturePage}/>
+          <Route path="/myprofile" exact component={MyProfile}/>
+          <Route path="/settings" exact component={Settings}/>
+          <Route exact component={ErrorPage}/>
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
